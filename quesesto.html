@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        h1 {
+            color: #d6336c;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+            animation: glow 1.5s infinite alternate;
+        }
+
+        .heart {
+            font-size: 50px;
+            color: #d6336c;
+            animation: heartbeat 1.5s infinite alternate;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #d6336c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-color: #ff4f7b;
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #d6336c;
+            font-weight: bold;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        @keyframes heartbeat {
+            from { transform: scale(1); }
+            to { transform: scale(1.2); }
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(255, 105, 180, 0.8); }
+            to { text-shadow: 0 0 20px rgba(255, 105, 180, 1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes floatHearts {
+            from { transform: translateY(100vh) scale(0.5); opacity: 1; }
+            to { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        .heart-animation {
+            position: absolute;
+            color: rgba(255, 105, 180, 0.8);
+            font-size: 20px;
+            animation: floatHearts 4s linear infinite;
+        }
+
+        .gif {
+            width: 150px;
+            margin-top: 20px;
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>¿Quieres ser mi San Valentín?</h1>
+        <div class="heart">❤️</div>
+        <div class="buttons">
+            <button onclick="showMessage('yes')">Sí</button>
+            <button onclick="showMessage('no')">No</button>
+        </div>
+        <div id="responseMessage" class="message"></div>
+        <img id="gifImage" class="gif">
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart-animation");
+            heart.innerHTML = "❤️";
+            document.body.appendChild(heart);
+
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+
+        setInterval(createHeart, 500);
+
+        function showMessage(option) {
+            const message = document.getElementById("responseMessage");
+            const gif = document.getElementById("gifImage");
+
+            if (option === 'yes') {
+                message.innerHTML = "Gracias mi amorcito lindo, eres increíble ❤️ ¡Me encantas mucho!";
+                gif.src = "https://media.giphy.com/media/3oz8xIsloV7zOmt81G/giphy.gif"; // GIF de corazones
+                gif.style.display = "block";
+            } else {
+                message.innerHTML = "No es una opción, bandida 😜";
+                gif.src = "https://media.giphy.com/media/jD4DwBtqPXRXa/giphy.gif"; // GIF de risa
+                gif.style.display = "block";
+            }
+
+            message.classList.add("visible");
+        }
+    </script>
+
+    <audio autoplay loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+    </audio>
+
+</body>
+</html>
